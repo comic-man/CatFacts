@@ -1,6 +1,15 @@
 import { bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
-import { AppComponent } from './app/app.component';
+import { AppComponent } from './app/app.component'; // Your main component
+import {provideHttpClient, withFetch} from '@angular/common/http'; // Correct modern module
+import { CatFactService } from './app/cat-fact.service'; // Service to handle API calls
 
-bootstrapApplication(AppComponent, appConfig)
-  .catch((err) => console.error(err));
+// Bootstrapping the standalone application
+bootstrapApplication(AppComponent, {
+  providers: [
+    CatFactService,
+    provideHttpClient(
+      withFetch()
+    )// Register the service
+  ],
+
+}).catch(err => console.error(err));
