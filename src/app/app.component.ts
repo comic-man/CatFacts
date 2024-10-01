@@ -1,25 +1,38 @@
-import { Component, OnInit, } from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit,} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import {CatFactService} from "./cat-fact.service";
+import {DadJokeService} from "./dad-joke.service";
+import {CommonModule, NgForOf} from "@angular/common";
+
+
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, NgForOf, CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit {
-  title = 'Cat-Facts';
+  title = 'Dad Jokes';
+  dadJoke: string = '';
 
-  catFacts: any[] = [];
-
-  constructor(private catFactService: CatFactService) {}
+  constructor(private dadJokeService: DadJokeService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
-    this.catFactService.getCatFacts().subscribe((data) => {
-      this.catFacts = data; // Assign the fetched data to the catFacts array
+    this.generateDadJoke()
+  }
+
+  // Function to generate a random dad joke
+  generateDadJoke(): void {
+    this.dadJokeService.getDadJoke().subscribe((data: any) => {
+      console.log(data);
+      this.dadJoke = data.joke;
+      console.log(this.dadJoke);
+        this.cdr.detectChanges();
+      },
+      (error) => {
+        console.error('Error fetching joke:', error);
     });
   }
 }
