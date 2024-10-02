@@ -32,10 +32,8 @@ body {
 .dad-joke-box {
   display: flex;
   flex-direction: column;
-  background-color: #847b7b;
   padding: 10px;
   margin: 10px 0;
-  border-left: 5px solid #ffc107;
   border-radius: 5px;
   width: 100%;
   justify-content: space-between;
@@ -57,9 +55,8 @@ body {
 .generate-button {
   display: inline-block;
   padding: 10px 20px;
-  background-color: #28a745;
   color: white;
-  font-size: 16px;
+  font-size: 35px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -76,7 +73,6 @@ h2 {
   text-align: center;
   color: #333;
   margin-top: 20px;
-  background-color: #28a745;
 }
 p {
   margin: 0; /* Remove default paragraph margin */
